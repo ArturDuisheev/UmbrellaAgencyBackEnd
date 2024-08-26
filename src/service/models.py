@@ -35,22 +35,21 @@ class Process(BaseModel):
         verbose_name_plural = _('Процессы')
 
 
-class Portfolio(BaseModel):
-    img = models.ImageField(
-        _('Изображение'),
-        upload_to='portfolio/'
-    )
+class BeforeStartJob(BaseModel):
     title = models.CharField(
-        _('Название'),
+        _('Заголовок'),
         max_length=120
+    )
+    description = models.TextField(
+        _('Описание')
     )
 
     def __str__(self):
-        return f'Название: {self.title}'
+        return f'заголовок: {self.title}'
 
     class Meta:
-        verbose_name = _('Портфолио')
-        verbose_name_plural = _('Портфолио')
+        verbose_name = _('До начала работы')
+        verbose_name_plural = _('До начала работ')
 
 
 class TeamMember(BaseModel):
@@ -82,10 +81,10 @@ class Tab(BaseModel):
         related_name='tab_processes',
         verbose_name=_('Процессы')
     )
-    portfolios = models.ManyToManyField(
-        Portfolio,
-        related_name='tab_portfolios',
-        verbose_name=_('Портфолио')
+    before_start_job = models.ManyToManyField(
+        BeforeStartJob,
+        related_name='tab_before_start_job',
+        verbose_name=_('До начала работы')
     )
     team = models.ManyToManyField(
         TeamMember,

@@ -21,16 +21,6 @@ class ProcessSerializer(serializers.ModelSerializer):
         )
 
 
-class PortfolioSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = service_mod.Portfolio
-        fields = (
-            'id',
-            'img',
-            'title'
-        )
-
-
 class TeamMemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = service_mod.TeamMember
@@ -40,10 +30,20 @@ class TeamMemberSerializer(serializers.ModelSerializer):
         )
 
 
+class BeforeStartJob(serializers.ModelSerializer):
+    class Meta:
+        model = service_mod.BeforeStartJob
+        fields = (
+            'id',
+            'title',
+            'description'
+        )
+
+
 class TabSerializer(serializers.ModelSerializer):
     sections = SectionSerializer(many=True)
     processes = ProcessSerializer(many=True)
-    portfolios = PortfolioSerializer(many=True)
+    before_start_job = BeforeStartJob(many=True)
     team = TeamMemberSerializer(many=True)
 
     class Meta:
@@ -52,8 +52,8 @@ class TabSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'sections',
+            'before_start_job',
             'processes',
-            'portfolios',
             'team'
         )
 

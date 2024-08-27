@@ -23,6 +23,10 @@ class Section(BaseModel):
 
 
 class Process(BaseModel):
+    title = models.CharField(
+        _('Заголовок'),
+        max_length=120
+    )
     description = models.TextField(
         _('Описание процесса')
     )

@@ -23,7 +23,7 @@ THEME_PARTY_APPS = [
 
 THIRTY_PARTY_APPS = [
     'rest_framework',
-    'debug_toolbar',
+    # 'debug_toolbar',
     'corsheaders',
     'drf_yasg'
 ]
@@ -51,7 +51,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    # "debug_toolbar.middleware.DebugToolbarMiddleware",
 
 ]
 

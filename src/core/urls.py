@@ -15,7 +15,7 @@ urlpatterns_api_v1 = [
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(urlpatterns_api_v1)),
-    path('', include(urlpatterns_swagger))
+    path('swagger/', include(urlpatterns_swagger))
 ]
 
 from django.conf import settings

@@ -5,10 +5,11 @@ services:
     build:
       context: ./src
       dockerfile: Dockerfile.backend
+
+    volumes:
+      - ./core/media:/home/app/web/core/media
     command: >
       gunicorn core.wsgi:application --bind 0.0.0.0:8000 --access-logfile -
-    volumes:
-      - ./src/core/db.sqlite3/:/home/app/core/db.sqlite3/
     ports:
       - "8000:8000"
     env_file:
@@ -22,7 +23,6 @@ services:
       dockerfile: Dockerfile.proxy
     volumes:
       - ./src/core/static:/home/app/web/static
-      - ./src/core/media:/home/app/web/media
     ports:
       - "80:80"
     depends_on:

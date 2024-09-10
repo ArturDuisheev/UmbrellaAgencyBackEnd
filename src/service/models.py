@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
 
 from base.models import BaseModel
 
@@ -104,11 +104,6 @@ class Tab(BaseModel):
         verbose_name_plural = _('Табы')
 
 
-def validate_gif(value):
-    if not value.name.endswith('.gif'):
-        raise ValidationError(_('Разрешены только файлы GIF.'))
-
-
 class Service(BaseModel):
     title = models.CharField(
         _('Заголовок'),
@@ -116,13 +111,18 @@ class Service(BaseModel):
     )
     short_description_for_banner = models.CharField(
         _('Краткое описание для баннера главной страницы'),
-        help_text=_('Макс. символов: 90'),
-        max_length=90,
+        help_text=_('Макс. символов: 120'),
+        max_length=120,
     )
     gif = models.FileField(
         _('Гифка'),
         upload_to='gifs/',
-        validators=[validate_gif],
+        validators=[
+            FileExtensionValidator(
+                allowed_extensions=['gif',],
+                message=_('Допустимые форматы: .gif')
+            )
+        ],
         help_text=_('Загрузите гифку для услуги. Допустимые форматы: .gif'),
     )
     tabs = models.ManyToManyField(

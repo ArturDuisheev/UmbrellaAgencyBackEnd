@@ -13,9 +13,8 @@ class Founder(BaseModel):
         _('Должность'),
         max_length=120
     )
-    quote = models.CharField(
+    quote = models.TextField(
         _('Цитата'),
-        max_length=120,
         blank=True,
         null=True
     )

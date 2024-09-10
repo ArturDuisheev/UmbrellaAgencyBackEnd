@@ -8,7 +8,7 @@ urlpatterns_api_v1 = [
     path('reviews/', include('reviews.urls')),
     path('service/', include('service.urls')),
     path('form/', include('ServiceDesk.urls')),
-    path('about_page/', include('about.urls'))
+    path('about_page/', include('about.urls')),
 
 ]
 

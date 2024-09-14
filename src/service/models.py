@@ -83,7 +83,8 @@ class Tab(BaseModel):
     processes = models.ManyToManyField(
         Process,
         related_name='tab_processes',
-        verbose_name=_('Процессы')
+        verbose_name=_('Процессы'),
+        blank=True, null=True
     )
     before_start_job = models.ManyToManyField(
         BeforeStartJob,

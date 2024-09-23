@@ -32,7 +32,7 @@ class Process(BaseModel):
     )
 
     def __str__(self):
-        return f'Описание процесса: {self.description}'
+        return f'{self.title} - {self.description}'
 
     class Meta:
         verbose_name = _('Процесс')

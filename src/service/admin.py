@@ -1,4 +1,6 @@
 from django.contrib import admin as django_admin
+
+from base.admin import BaseAdmin
 from .models import Section as SectionModel
 from .models import Process as ProcessModel
 from .models import BeforeStartJob as BeforeStartJobModel
@@ -7,17 +9,17 @@ from .models import Tab as TabModel
 from .models import Service as ServiceModel
 
 
-class SectionAdmin(django_admin.ModelAdmin):
+class SectionAdmin(BaseAdmin):
     list_display = ('title', 'description')
     search_fields = ('title', 'description')
 
 
-class ProcessAdmin(django_admin.ModelAdmin):
-    list_display = ('description',)
-    search_fields = ('description',)
+class ProcessAdmin(BaseAdmin):
+    list_display = ('title', 'description',)
+    search_fields = ('title', 'description',)
 
 
-class BeforeStartJobAdmin(django_admin.ModelAdmin):
+class BeforeStartJobAdmin(BaseAdmin):
     list_display = ('title', 'description')
     search_fields = list_display
 

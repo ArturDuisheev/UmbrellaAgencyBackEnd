@@ -2,10 +2,10 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import FileExtensionValidator
 
-from base.models import BaseModel
+from base.models import BaseModel, BaseService
 
 
-class Section(BaseModel):
+class Section(BaseService):
     title = models.CharField(
         _('Заголовок'),
         max_length=120
@@ -20,9 +20,10 @@ class Section(BaseModel):
     class Meta:
         verbose_name = _('Секция')
         verbose_name_plural = _('Секции')
+        ordering = ['created_at']
 
 
-class Process(BaseModel):
+class Process(BaseService):
     title = models.CharField(
         _('Заголовок'),
         max_length=120

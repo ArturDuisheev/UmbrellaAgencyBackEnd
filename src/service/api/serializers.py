@@ -8,7 +8,8 @@ class SectionSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'title',
-            'description'
+            'description',
+            # 'order'
         )
 
 
@@ -18,7 +19,8 @@ class ProcessSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'title',
-            'description'
+            'description',
+            # 'order'
         )
 
 

@@ -11,3 +11,14 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
+
+class BaseService(BaseModel):
+    pass
+    # order = models.PositiveIntegerField(
+    #     _('Последовательность')
+    # )
+
+    class Meta:
+        abstract = True
+
+

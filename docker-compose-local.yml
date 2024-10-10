@@ -19,8 +19,8 @@ services:
 
   nginx:
     build:
-      context: ./nginx/prod
-      dockerfile: Dockerfile.prod.proxy
+      context: ./nginx/local
+      dockerfile: Dockerfile.proxy
     volumes:
       - ./src/core/static:/home/app/web/static
     ports:

@@ -2,6 +2,7 @@ from rest_framework import serializers
 from ServiceDesk.models import ApplicationForm, Contact
 from service.models import Service
 
+
 class ApplicationFormSerializer(serializers.ModelSerializer):
     created_at = serializers.DateTimeField(format='%d-%m-%y Время: %H', read_only=True)
     service_titles = serializers.ListField(
@@ -34,7 +35,6 @@ class ApplicationFormSerializer(serializers.ModelSerializer):
 
 
 class ContactSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Contact
         fields = ['number', 'email', 'address']

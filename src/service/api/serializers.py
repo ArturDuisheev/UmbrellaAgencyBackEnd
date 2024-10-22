@@ -5,36 +5,60 @@ from service import models as service_mod
 class SectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = service_mod.Section
-        fields = ('id', 'title', 'description', 'order')
+        fields = (
+            'id',
+            'title',
+            'description',
+            # 'order'
+        )
 
 
 class ProcessSerializer(serializers.ModelSerializer):
     class Meta:
         model = service_mod.Process
-        fields = ('id', 'title', 'description', 'order')
+        fields = (
+            'id',
+            'title',
+            'description',
+            # 'order'
+        )
 
 
 class TeamMemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = service_mod.TeamMember
-        fields = ('id', 'position', 'order')
+        fields = (
+            'id',
+            'position'
+        )
 
 
-class BeforeStartJobSerializer(serializers.ModelSerializer):
+class BeforeStartJob(serializers.ModelSerializer):
     class Meta:
         model = service_mod.BeforeStartJob
-        fields = ('id', 'title', 'description', 'order')
+        fields = (
+            'id',
+            'title',
+            'description'
+        )
 
 
 class TabSerializer(serializers.ModelSerializer):
     sections = SectionSerializer(many=True)
     processes = ProcessSerializer(many=True)
-    before_start_job = BeforeStartJobSerializer(many=True)
+    before_start_job = BeforeStartJob(many=True)
     team = TeamMemberSerializer(many=True)
 
     class Meta:
         model = service_mod.Tab
-        fields = ('id', 'title', 'sections', 'before_start_job', 'processes', 'team', 'order')
+        fields = (
+            'id',
+            'title',
+            'sections',
+            'before_start_job',
+            'processes',
+            'team'
+        )
 
 
 class ServiceSerializer(serializers.ModelSerializer):
@@ -42,7 +66,13 @@ class ServiceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = service_mod.Service
-        fields = ('id', 'title', 'gif', 'short_description_for_banner', 'tabs', 'order_service')
+        fields = (
+            'id',
+            'title',
+            'gif',
+            'short_description_for_banner',
+            'tabs'
+        )
 
 
 class ServiceMainPageSerializer(serializers.ModelSerializer):
@@ -51,7 +81,11 @@ class ServiceMainPageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = service_mod.Service
-        fields = ('id', 'title', 'category', 'order_service')
+        fields = (
+            'id',
+            'title',
+            'category'
+        )
 
     def get_title(self, obj):
         return obj.title

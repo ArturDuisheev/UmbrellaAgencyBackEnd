@@ -10,40 +10,34 @@ from .models import Service as ServiceModel
 
 
 class SectionAdmin(BaseAdmin):
-    list_display = ('title', 'order', 'description')  # Добавляем поле order для отображения
+    list_display = ('title', 'description')
     search_fields = ('title', 'description')
-    ordering = ['order']  # Сортировка по order в админке
 
 
 class ProcessAdmin(BaseAdmin):
-    list_display = ('title', 'order', 'description')
-    search_fields = ('title', 'description')
-    ordering = ['order']
+    list_display = ('title', 'description',)
+    search_fields = ('title', 'description',)
 
 
 class BeforeStartJobAdmin(BaseAdmin):
-    list_display = ('title', 'order', 'description')
-    search_fields = ('title', 'description')
-    ordering = ['order']
+    list_display = ('title', 'description')
+    search_fields = list_display
 
 
 class TeamMemberAdmin(django_admin.ModelAdmin):
-    list_display = ('position', 'order')
+    list_display = ('position',)
     search_fields = ('position',)
-    ordering = ['order']
 
 
 class TabAdmin(django_admin.ModelAdmin):
-    list_display = ('title', 'order')
+    list_display = ('title',)
     search_fields = ('title',)
-    ordering = ['order']
     filter_horizontal = ('sections', 'processes', 'before_start_job', 'team')
 
 
 class ServiceAdmin(django_admin.ModelAdmin):
-    list_display = ('title', 'order_service')
+    list_display = ('title',)
     search_fields = ('title',)
-    ordering = ['order_service']
     filter_horizontal = ('tabs',)
 
 

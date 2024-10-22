@@ -33,7 +33,7 @@ class ApplicationFormCreateAPIView(generics.CreateAPIView):
 
 
                 bot_token = '7414126400:AAGzT4FIlTF5AFfL2VLecXLHOsRvb0DWPaA'
-                chat_id = '860389338'
+                chat_id = '371469810'
                 message = (
                     f'Номер заявки: {random.randint(1000, 9999)}\n'
                     f"Имя: {request.data['name']}\n"

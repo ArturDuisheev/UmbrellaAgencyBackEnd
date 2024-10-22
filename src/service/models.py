@@ -16,10 +16,11 @@ class Section(BaseService):
     class Meta:
         verbose_name = _('Секция')
         verbose_name_plural = _('Секции')
-        ordering = ['order', 'created_at']  # Сортировка по order
+        ordering = ['order', 'created_at']
 
 
 class Process(BaseService):
+    section = models.ForeignKey(Section, on_delete=models.CASCADE, related_name='processes')  # Связь с Section
     title = models.CharField(_('Заголовок'), max_length=120)
     description = models.TextField(_('Описание процесса'))
     order = models.PositiveIntegerField(_('Порядок'), default=0, help_text=_('Позиция для сортировки'))
@@ -30,6 +31,7 @@ class Process(BaseService):
     class Meta:
         verbose_name = _('Процесс')
         verbose_name_plural = _('Процессы')
+        unique_together = ('section', 'order')  # Уникальность order в пределах одной секции
         ordering = ['order', 'created_at']
 
 
@@ -39,7 +41,7 @@ class BeforeStartJob(BaseModel):
     order = models.PositiveIntegerField(_('Порядок'), default=0, help_text=_('Позиция для сортировки'))
 
     def __str__(self):
-        return f'заголовок: {self.title}'
+        return f'Заголовок: {self.title}'
 
     class Meta:
         verbose_name = _('До начала работы')
@@ -63,7 +65,7 @@ class TeamMember(BaseModel):
 class Tab(BaseModel):
     title = models.CharField(_('Заголовок'), max_length=120)
     sections = models.ManyToManyField(Section, related_name='tab_sections', verbose_name=_('Секции'))
-    processes = models.ManyToManyField(Process, related_name='tab_processes', verbose_name=_('Процессы'), blank=True, null=True)
+    processes = models.ManyToManyField(Process, related_name='tab_processes', verbose_name=_('Процессы'), blank=True)
     before_start_job = models.ManyToManyField(BeforeStartJob, related_name='tab_before_start_job', verbose_name=_('До начала работы'))
     team = models.ManyToManyField(TeamMember, related_name='tab_team', verbose_name=_('Команда'))
     order = models.PositiveIntegerField(_('Порядок'), default=0, help_text=_('Позиция для сортировки'))

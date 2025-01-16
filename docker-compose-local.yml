@@ -16,6 +16,8 @@ services:
       - ./src/.env
     depends_on:
       - db
+    networks:
+      - app_network
 
   nginx:
     build:
@@ -25,8 +27,11 @@ services:
       - ./src/core/static:/home/app/web/static
     ports:
       - "80:80"
+    networks:
+      - app_network
     depends_on:
       - back-end
+      - php-fpm
 
   front:
     build:
@@ -35,6 +40,8 @@ services:
     ports:
       - "3000:3000"
     hostname: 'umbrella'
+    networks:
+      - app_network
 
   db:
     image: postgres:15.1-alpine3.17
@@ -44,8 +51,30 @@ services:
       - postgres_data:/var/lib/postgres/data/
     env_file:
       - ./src/.env
+    networks:
+      - app_network
+
+
+  php-fpm:
+    build:
+      context: ./bitrix/tilda_integration
+      dockerfile: Dockerfile
+    container_name: php-fpm
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./bitrix/tilda_integration:/var/www/html
+    networks:
+      - app_network
+
+
+
 
 volumes:
   static_volume:
   media_volume:
   postgres_data:
+
+networks:
+  app_network:
+    driver: bridge

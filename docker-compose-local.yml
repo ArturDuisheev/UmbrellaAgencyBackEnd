@@ -30,7 +30,7 @@ services:
 
   front:
     build:
-      context: ../umbrella
+      context: ../Umbrella-Front
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
